@@ -8,6 +8,12 @@
     <classPathEntry location="E:\worklib\mysql-connector-java-5.1.6.jar" />
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--不追加xml-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"></plugin>
+        <!--省略掉注释-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
         <!--数据库配置 参考yml配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://192.168.2.3:3306/mall?characterEncoding=utf-8"
@@ -19,7 +25,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
         <!--domain配置-->
-        <javaModelGenerator targetPackage="com.imooc.mall.domain" targetProject="E:\mall\src">
+        <javaModelGenerator targetPackage="com.imooc.mall.domain" targetProject="E:\mall\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -28,17 +34,13 @@
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!--dao配置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.imooc.mall.dao"  targetProject="E:\mall\src">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.imooc.mall.dao"  targetProject="E:\mall\src\main\java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >
-            <property name="useActualColumnNames" value="true"/>
-            <generatedKey column="ID" sqlStatement="DB2" identity="true" />
-            <columnOverride column="DATE_FIELD" property="startDate" />
-            <ignoreColumn column="FRED" />
-            <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
-        </table>
+        <!--生成配置 舍弃example-->
+        <table tableName="mall_order" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        enableUpdateByExample="false"></table>
 
     </context>
 </generatorConfiguration>
