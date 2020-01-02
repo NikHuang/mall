@@ -4,10 +4,17 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <!--数据库驱动路径-->
-    <classPathEntry location="E:\worklib\mysql-connector-java-5.1.6.jar" />
+    <!--数据库驱动路径 可省略 但是oracle不行 必须指定-->
+    <!--<classPathEntry location="E:\worklib\mysql-connector-java-5.1.6.jar" />-->
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 使用自带序列化插件 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 整合lombok-->
+        <plugin type="com.chrm.mybatis.generator.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
         <!--不追加xml-->
         <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"></plugin>
         <!--省略掉注释-->
@@ -27,7 +34,6 @@
         <!--domain配置-->
         <javaModelGenerator targetPackage="com.imooc.mall.domain" targetProject="E:\mall\src\main\java">
             <property name="enableSubPackages" value="true" />
-            <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!--xml配置-->
         <sqlMapGenerator targetPackage="mapper"  targetProject="E:\mall\src\main\resources">

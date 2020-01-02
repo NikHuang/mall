@@ -2,7 +2,6 @@ package com.imooc.mall.dao;
 
 import com.imooc.mall.domain.MallOrder;
 
-
 public interface MallOrderMapper {
     int deleteByPrimaryKey(Integer id);
 
